@@ -8,6 +8,7 @@ import { RootState } from "../../store/reducers";
 import { setCurrentTask } from "../../store/reducers/currentTask/actions";
 import { TaskType } from "../../store/reducers/currentTask";
 import { changeTask, deleteTask } from "../../store/reducers/projects/actions";
+import { setShowCurrentTask } from "../../store/reducers/base/actions";
 
 import CurrentTaskDates from "./components/dates";
 import CurrentTaskProperties from "./components/properties";
@@ -31,7 +32,10 @@ const CurrentTask: React.FC = () => {
     }, [currentTaskState]);
 
     const deleteCurrentTask = () => {
-        if (projectId && curTask) dispatch(deleteTask(+projectId, curTask.id));
+        if (projectId && curTask) {
+            dispatch(deleteTask(+projectId, curTask.id));
+            dispatch(setShowCurrentTask(false));
+        }
         dispatch(setCurrentTask(null));
     };
 

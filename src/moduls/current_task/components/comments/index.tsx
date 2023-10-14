@@ -16,6 +16,7 @@ const CurrentTaskComments: React.FC = () => {
     const task = useSelector(
         (state: RootState) => state.currentTask.currentTask
     );
+    const userName = useSelector((state: RootState) => state.base.name);
 
     const [searchParams] = useSearchParams();
 
@@ -26,12 +27,13 @@ const CurrentTaskComments: React.FC = () => {
         const projectId = searchParams.get("id");
         if (projectId && task) {
             const newComment: taskCommentsType = {
-                author: "your name",
+                author: userName,
                 date: new Date().getTime(),
                 id: new Date().getTime(),
                 subcomments: [],
                 text: inputText,
             };
+
             const newTask = { ...task };
 
             if (currentComment === null) {
@@ -47,6 +49,7 @@ const CurrentTaskComments: React.FC = () => {
                     return el;
                 });
             }
+
             dispatch(setCurrentTask(newTask));
             dispatch(changeTask(+projectId, newTask));
             setCurrentComment(null);

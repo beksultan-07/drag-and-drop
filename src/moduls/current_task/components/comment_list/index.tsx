@@ -8,7 +8,7 @@ interface Props {
     choosenComment: (
         e: React.MouseEvent<HTMLLIElement, MouseEvent>,
         comment: taskCommentsType
-    ) => void;
+    ) => void | null;
 }
 
 const CurrentTaskCommentsList: React.FC<Props> = ({
@@ -35,7 +35,10 @@ const CurrentTaskCommentsList: React.FC<Props> = ({
                         {el.text}
                     </p>
                     <CurrentTaskCommentsList
-                        choosenComment={choosenComment}
+                        choosenComment={(
+                            e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+                            comment: taskCommentsType
+                        ) => null}
                         commentIndets={commentIndets + 1}
                         comments={el.subcomments}
                     />

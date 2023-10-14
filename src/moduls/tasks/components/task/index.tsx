@@ -40,9 +40,9 @@ const TaskDraggable: React.FC<Prop> = ({
             className="tasks__col__list__item"
             draggable={true}
             onDragStart={(e) => onDragStartHandler(e, task)}
-            onDragLeave={(e) => onDragLeaveHandler(e)}
             onDragOver={(e) => onDragOver(e)}
-            onDrop={(e) => onDropHandler(e, task)}
+            onDragLeave={(e) => onDragLeaveHandler(e)}
+            // onDrop={(e) => onDropHandler(e, task)}
             onClick={(e) => onClickHandler(e, task)}
         >
             <button className="tasks__col__list__item-btn">
