@@ -12,14 +12,17 @@ import {
     CHANGETASK,
     SetProjectsAction,
     CHANGETASKS,
-    ChangeTasksAction,
     AddProjectAction,
     ADDPROJECT,
     DELETEPROJECT,
     DeleteProjectAction,
+    ChangeProjectNameAction,
+    SetTasksAction,
+    CHANGEPROJECTNAME,
 } from "./actions";
 import {
     addTaskReducer,
+    changeProjectNameReducer,
     changeTaskReducer,
     changeTasksReducer,
     deleteProjectReducer,
@@ -49,13 +52,16 @@ const projectsReducer = (
         | DeleteTaskAction
         | SetProjectsAction
         | ChangeTaskAction
-        | ChangeTasksAction
+        | SetTasksAction
+        | ChangeProjectNameAction
 ): projectsStateType => {
     switch (action.type) {
         case ADDTASK:
             return addTaskReducer(state, action.payload);
         case SETPROJECTS:
             return { projects: action.payload };
+        case CHANGEPROJECTNAME:
+            return changeProjectNameReducer(state, action.payload);
         case DELETETASK:
             return deleteTaskReducer(state, action.payload);
         case ADDPROJECT:

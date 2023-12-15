@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TasksList from "../moduls/tasks";
 import { RootState } from "../store/reducers";
 import CurrentTask from "../moduls/current_task";
+import Header from "../moduls/header";
 
 const Tasks = () => {
     const showCurrentTask = useSelector(
@@ -20,6 +21,7 @@ const Tasks = () => {
 
     return (
         <>
+            <Header />
             <TasksList />
             {showCurrentTask ? <CurrentTask /> : null}
         </>

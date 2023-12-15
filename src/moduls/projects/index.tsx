@@ -19,7 +19,7 @@ const ProjectsList = () => {
     const createNewProjectHandler = () => {
         const newProject: ProjectType = {
             id: new Date().getTime(),
-            name: "",
+            name: "new project",
             tasks: [],
         };
         dispatch(addProjcet(newProject));

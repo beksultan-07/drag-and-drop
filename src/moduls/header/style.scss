@@ -1,0 +1,29 @@
+.header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 64px 64px 0px rgba(0, 0, 0, 0.06);
+    margin: 0 0 50px;
+
+    &-settings {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &-back {
+        color: #000;
+        font-size: 28px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    &-title {
+        border: none;
+        outline: none;
+        color: #000;
+        font-size: 34px;
+        font-weight: 500;
+    }
+}

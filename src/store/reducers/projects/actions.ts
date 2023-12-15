@@ -4,11 +4,20 @@ import { ProjectType } from ".";
 
 export const ADDPROJECT = "ADDPROJECT";
 export const DELETEPROJECT = "DELETEPROJECT";
+export const CHANGEPROJECTNAME = "CHANGEPROJECTNAME";
 export const SETPROJECTS = "SETPROJECTS";
 export const ADDTASK = "ADDTASK";
 export const DELETETASK = "DELETETASK";
 export const CHANGETASK = "CHANGETASK";
 export const CHANGETASKS = "CHANGETASKS";
+
+export interface ChangeProjectNameAction {
+    type: typeof CHANGEPROJECTNAME;
+    payload: {
+        projectId: number;
+        name: string;
+    };
+}
 
 export interface AddProjectAction {
     type: typeof ADDPROJECT;
@@ -49,13 +58,24 @@ export interface ChangeTaskAction {
     };
 }
 
-export interface ChangeTasksAction {
+export interface SetTasksAction {
     type: typeof CHANGETASKS;
     payload: {
         projectId: number;
         tasks: Array<TaskType>;
     };
 }
+
+export const changeProjectName = (
+    id: number,
+    name: string
+): ChangeProjectNameAction => ({
+    type: CHANGEPROJECTNAME,
+    payload: {
+        projectId: id,
+        name,
+    },
+});
 
 export const addTask = (projectId: number, task: TaskType): AddTaskAction => ({
     type: ADDTASK,
@@ -95,10 +115,10 @@ export const changeTask = (
     payload: { projectId, task },
 });
 
-export const changeTasks = (
+export const setTasks = (
     projectId: number,
     tasks: Array<TaskType>
-): ChangeTasksAction => ({
+): SetTasksAction => ({
     type: CHANGETASKS,
     payload: { projectId, tasks },
 });

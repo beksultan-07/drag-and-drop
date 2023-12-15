@@ -4,15 +4,12 @@ import { useDispatch } from "react-redux";
 import { TaskType } from "../../../../store/reducers/currentTask";
 import TaskDraggable from "../task";
 import { setCurrentTask } from "../../../../store/reducers/currentTask/actions";
-import {
-    addTask,
-    changeTasks,
-} from "../../../../store/reducers/projects/actions";
+import { addTask, setTasks } from "../../../../store/reducers/projects/actions";
 
 interface Props {
     tasks: Array<TaskType>;
     projectId: number;
-    col: "Queue" | "Development" | "Done";
+    col: "Queue" | "Development" | "Done" | "All";
     currenTask: TaskType | null | undefined;
     setCurrenTask: React.Dispatch<
         React.SetStateAction<TaskType | null | undefined>
@@ -44,35 +41,37 @@ const TasksColumn: React.FC<Props> = ({
         e: React.DragEvent<HTMLLIElement>,
         task: TaskType
     ) => {
-        // e.preventDefault();
-        // const element = e.target as HTMLLIElement;
-        // if (currenTask) {
-        //     const newTasks: Array<TaskType> = tasks.map((t) => {
-        //         if (t.id === task.id) {
-        //             return {
-        //                 ...t,
-        //                 col: currenTask.col,
-        //                 order: currenTask.order,
-        //             };
-        //         }
-        //         if (t.id === currenTask.id) {
-        //             return {
-        //                 ...t,
-        //                 order: task.order,
-        //                 col: task.col,
-        //             };
-        //         }
-        //         return t;
-        //     });
-        //     dispatch(changeTasks(+projectId, newTasks));
-        //     setCurrenTask(null);
-        // }
-        // element.style.background = "#fff";
+        e.preventDefault();
+
+        const element = e.target as HTMLLIElement;
+        if (currenTask) {
+            const newTasks: Array<TaskType> = tasks.map((t) => {
+                if (t.id === task.id) {
+                    return {
+                        ...t,
+                        col: currenTask.col,
+                        order: currenTask.order,
+                    };
+                }
+                if (t.id === currenTask.id) {
+                    return {
+                        ...t,
+                        order: task.order,
+                        col: task.col,
+                    };
+                }
+                return t;
+            });
+            dispatch(setTasks(+projectId, newTasks));
+            setCurrenTask(null);
+        }
+        element.style.background = "#fff";
     };
 
     const addNewTaskHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         if (projectId) {
+            col = col === "All" ? "Queue" : col;
             const newTask: TaskType = {
                 col,
                 name: "new task",
@@ -102,7 +101,7 @@ const TasksColumn: React.FC<Props> = ({
                 {tasks
                     .sort(sortTasks)
                     .map((el) =>
-                        el.col === col ? (
+                        el.col === col || col === "All" ? (
                             <TaskDraggable
                                 key={el.id}
                                 task={el}

@@ -2,6 +2,21 @@ import { TaskType } from "../currentTask";
 
 import { ProjectType, projectsStateType } from ".";
 
+export const changeProjectNameReducer = (
+    state: projectsStateType,
+    info: {
+        projectId: number;
+        name: string;
+    }
+): projectsStateType => {
+    const newProjcets = state.projects.map((el) =>
+        el.id === info.projectId ? { ...el, name: info.name } : el
+    );
+    return {
+        projects: newProjcets,
+    };
+};
+
 export const deleteProjectReducer = (
     state: projectsStateType,
     projcetId: number
