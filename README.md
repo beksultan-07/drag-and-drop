@@ -1,7 +1,27 @@
-# Getting Started with Create React App
+# Project Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Project Management App allows users to create and manage projects with tasks organized into columns. Each task can be dragged and dropped between columns, edited, or deleted. The project is built using React, TypeScript, and Redux.
 
+## Features
+### Project Management:
+
+  Create new projects
+  Delete existing projects
+  Task Management:
+
+  Each project contains three columns: Queue, Development, Done
+  Drag and drop tasks between columns
+  Create, edit, and delete tasks
+  Task Details:
+    Title
+    Description
+    Start Date
+    End Date
+    Task Status
+    Attach files
+    Subtasks
+    Comments
+    
 ## Available Scripts
 
 In the project directory, you can run:
